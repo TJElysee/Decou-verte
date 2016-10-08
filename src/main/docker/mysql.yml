@@ -1,0 +1,14 @@
+version: '2'
+services:
+    decouverte-mysql:
+        container_name: decouverte-mysql
+        image: mysql:5.7.13
+        # volumes:
+        #     - ~/volumes/jhipster/DecouVerte/mysql/:/var/lib/mysql/
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=decouverte
+        ports:
+            - 3306:3306
+        command: mysqld --lower_case_table_names=1 --skip-ssl
