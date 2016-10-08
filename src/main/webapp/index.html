@@ -7,6 +7,23 @@
     <meta name="description" content="">
     <meta name="google" value="notranslate">
     <meta name="viewport" content="width=device-width">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="content/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="content/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="content/vendor/device-mockups/device-mockups.min.css">
+
+    <!-- Theme CSS -->
+    <link href="content/css/new-age.min.css" rel="stylesheet">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
@@ -17,22 +34,151 @@
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
+    <link href="content/css/scrolling-nav.css" rel="stylesheet">
+    <link href="content/css/landing-page.css" rel="stylesheet">
+    <link href="content/css/heroic-features.css" rel="stylesheet">
+
+    <style>
+
+    </style>
+
+
 </head>
-<body ng-app="decouVerteApp" ng-strict-di>
+<body id="page-top" ng-app="decouVerteApp" ng-strict-di>
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div class="container">
-        <div class="well" ui-view="content">
-            <!-- Angular views -->
-        </div>
+    <section id="carte" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="map"></div>
+                </div>
 
-        <div class="footer" ng-cloak>
-            <p data-translate="footer">This is your footer</p>
+                <div class="col-lg-4">
+                    Filtre ici en javascript
+                </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-lg-12 text-center">
+                <a class="btn btn-default page-scroll" href="#region">Besoin d'idées ?</a>
+              </div>
+              </div>
+            </div>
+    </section>
+
+    <div id="region" class="row colonne">
+        <div class="col-lg-12">
+            <h1>Activités proches de vous:</h1>
         </div>
     </div>
+    <!-- Page Features -->
+    <div class="row colonne text-center">
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="content/img/chemin.jpeg" class="preview" alt="">
+                <div class="caption">
+                    <h3>Randonnée</h3>
+                    <p>Organiser une randonnée entre collègues au Puy de Dôme.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="content/img/kayak.jpeg" class="preview" alt="">
+                <div class="caption">
+                    <h3>Kayak</h3>
+                    <p>Découvrer le Kayak dans la région.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="content/img/road.jpeg" class="preview" alt="">
+                <div class="caption">
+                    <h3>Vélo</h3>
+                    <p>Blabla sur le vélo ?blabl blabal blabla</p>
+                    <p>
+                          <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="content/img/museumjpeg" class="preview" alt="">
+                <div class="caption">
+                    <h3>Musée</h3>
+                    <p>Découvrer de nouvelles choses avec vos collègues.</p>
+                    <p>
+                          <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+
+
+	<a  name="contact"></a>
+    <div class="banner">
+
+        <div class="container">
+
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+
+
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#">Privacy</a>
+                    </li>
+                    <li>
+                        <a href="#">Terms</a>
+                    </li>
+                    <li>
+                        <a href="#">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+        <!-- Theme JavaScript -->
+        <script src="js/new-age.min.js"></script>
+
+    </body>
+
 
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
     <script>
@@ -71,6 +217,23 @@
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
+    <script>
+      function initMap() {
+        var uluru = {lat: 45.783329 , lng: 3.08333};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQGb_zaqK94WZD-7uMLHpz7zHm-6HybJU&callback=initMap">
+    </script>
+
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
     <script src="app/services/user/user.service.js"></script>
@@ -180,6 +343,15 @@
     <script src="app/account/account.state.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
+    <!-- jQuery -->
+    <script src="content/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="content/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="content/js/jquery.easing.min.js"></script>
+    <script src="content/js/scrolling-nav.js"></script>
 
 </body>
 </html>
