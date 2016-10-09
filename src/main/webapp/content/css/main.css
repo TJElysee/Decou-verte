@@ -417,4 +417,28 @@ Social Buttons
  margin-bottom: 20px;
 }
 
+#map2 {
+ height: 100px;
+ width: 50%;
+}
+
+.reservation{
+  width:200px;
+}
+
+.page-alerts {
+    margin-bottom: 20px;
+}
+
+.page-alerts .page-alert {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.filtre{
+  font-size: 15px;
+  text-align: left;
+}
+
+
 /* jhipster-needle-css-add-main JHipster will add new css style */

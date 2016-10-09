@@ -37,13 +37,12 @@
     <link href="content/css/scrolling-nav.css" rel="stylesheet">
     <link href="content/css/landing-page.css" rel="stylesheet">
     <link href="content/css/heroic-features.css" rel="stylesheet">
+    <link href="content/css/bootstrap-lightbox.css" rel="stylesheet">
 
-    <style>
-
-    </style>
 
 
 </head>
+
 <body id="page-top" ng-app="decouVerteApp" ng-strict-di>
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -54,27 +53,166 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div id="map"></div>
-                </div>
+                    <script>
+        var map;
+        var locations = [
+            [45.112226,3.018402,'Puy de Dome','fix'],
+            [45.743084,3.218453,'Plan d\'eau de Cournon', 'fix'],
+            [45.720528,3.127064,'Plateau de Gergovie','corporate'],
+            [45.778572,2.965535,'Nid de la Poule','fix'],
+            [45.774848,3.082513,'Clermontoise','regionaux']
+        ]
 
-                <div class="col-lg-4">
-                    Filtre ici en javascript
+    </script>
+
+    <!-- build:js app/app.js  -->
+    <script>
+      function initMap() {
+
+        var uluru = {lat: 45.783329 , lng: 3.08333};
+         map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            map: map
+          });
+          var content = '<h4>Meeting SOPRA-STERIA </h4>'+
+          '<h6>Evenement Entreprise</h6>'+
+          '<p>Créateur: <a>John Snow</a>'+
+          '<p>Lieu: Plateau de Gergovie </p>'+
+          '<p>Date: Samedi 08 Octobre 2016</p>'+
+          '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
+          +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(content);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+
+        }
+  }</script>
+                    <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQGb_zaqK94WZD-7uMLHpz7zHm-6HybJU&callback=initMap">
+                    </script>
                 </div>
+                <div class="col-lg-4 filtre">
+                  <h4>Filtres:</h4>
+                  <div class="checkbox">
+                      <label><input type="checkbox" checked = true id="ch1" onclick="updateMap()">Activités</label>
+                  </div>
+                  <div class="checkbox">
+                      <label><input type="checkbox" checked = true  id="ch2" onclick="updateMap()" value="ch2">Evenements du moment</label>
+                  </div>
+                  <div class="checkbox">
+                      <label><input type="checkbox" checked = true  id="ch3" onclick="updateMap()" value="ch3" >Organisé par votre entreprise</label>
+                  </div>
+                </div>
+<div>
+                <script>
+
+                   function updateMap(){
+                      map = null;
+                     var uluru = {lat: 45.783329 , lng: 3.08333};
+                      map = new google.maps.Map(document.getElementById('map'), {
+                       zoom: 10,
+                       center: uluru
+                     });
+
+                     var infowindow = new google.maps.InfoWindow();
+
+                     var marker, i;
+
+                     for (i = 0; i < locations.length; i++) {
+                       if((locations[i][3]=='fix' && document.getElementById('ch1').checked )
+                       || (locations[i][3]=='regionaux' && document.getElementById('ch2').checked )
+                       || (locations[i][3]=='corporate' && document.getElementById('ch3').checked )){
+
+                       marker = new google.maps.Marker({
+                         position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                         map: map
+                       });
+                       var content = '<h4>Meeting SOPRA-STERIA </h4>'+
+                       '<h6>Evenement Entreprise</h6>'+
+                       '<p>Créateur: <a>John Snow</a>'+
+                       '<p>Lieu: Plateau de Gergovie </p>'+
+                       '<p>Date: Samedi 08 Octobre 2016</p>'+
+                       '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
+                       +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
+
+                       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                         return function() {
+                           infowindow.setContent(content);
+                           infowindow.open(map, marker);
+                         }
+                       })(marker, i));
+
+                   }
+                 }
+                 }
+                </script>
+            </div>
             </div>
 
             <div class="row">
 
               <div class="col-lg-12 text-center">
-                <a class="btn btn-default page-scroll" href="#region">Besoin d'idées ?</a>
+                <a class="btn btn-default page-scroll" href="#regionscroll">Besoin d'idées ?</a>
               </div>
               </div>
-            </div>
+
     </section>
 
-    <div id="region" class="row colonne">
+
+
+
+
+
+<section>
+    <div id="regionscroll" class="row colonne">
         <div class="col-lg-12">
             <h1>Activités proches de vous:</h1>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModalmap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Réserver</h4>
+          </div>
+          <div class="modal-body">
+
+              <p>Nombre de personnes:</p>
+              <div class="list-group">
+                <button type="button" class="list-group-item">1</button>
+                <button type="button" class="list-group-item">2</button>
+                <button type="button" class="list-group-item">3</button>
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="page-alert" data-toggle-id="2">Valider</button>
+          </div>
+  </div>
+          </div>
+        </div>
     <!-- Page Features -->
     <div class="row colonne text-center">
 
@@ -83,12 +221,33 @@
                 <img src="content/img/chemin.jpeg" class="preview" alt="">
                 <div class="caption">
                     <h3>Randonnée</h3>
-                    <p>Organiser une randonnée entre collègues au Puy de Dôme.</p>
+                    <p>Organisez une randonnée entre collègues au Puy de Dôme.</p>
                     <p>
-                        <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                        <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">Plus d'infos</a>
                     </p>
                 </div>
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                1
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
@@ -96,12 +255,33 @@
                 <img src="content/img/kayak.jpeg" class="preview" alt="">
                 <div class="caption">
                     <h3>Kayak</h3>
-                    <p>Découvrer le Kayak dans la région.</p>
+                    <p>Découvrez le kayak au lac de Cournon.</p>
                     <p>
-                        <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                        <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Plus d'infos</a>
                     </p>
                 </div>
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                2
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
@@ -109,12 +289,33 @@
                 <img src="content/img/road.jpeg" class="preview" alt="">
                 <div class="caption">
                     <h3>Vélo</h3>
-                    <p>Blabla sur le vélo ?blabl blabal blabla</p>
+                    <p>Découvrez les pistes d'Auvergne avec votre équipe</p>
                     <p>
-                          <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                          <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Plus d'info</a>
                     </p>
                 </div>
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                3
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
@@ -122,9 +323,9 @@
                 <img src="content/img/museumjpeg" class="preview" alt="">
                 <div class="caption">
                     <h3>Musée</h3>
-                    <p>Découvrer de nouvelles choses avec vos collègues.</p>
+                    <p>Découvrez de nouvelles choses avec vos collègues.</p>
                     <p>
-                          <a href="#" class="btn btn-primary">Réserver</a> <a href="#" class="btn btn-default">Plus d'Infos</a>
+                          <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Plus d'infos</a>
                     </p>
                 </div>
             </div>
@@ -133,8 +334,60 @@
     </div>
     <!-- /.row -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Visite</h4>
+          </div>
+          <div class="modal-body">
 
+              <h4>Musée d'art Roger-Quilliot </h4>
+              <h6>Activité</h6>
+              <p>Créateur: <a>Jane Smith</a>
+              <p>Lieu: Place Louis-Deteix </p>
+              <p>Date: Lundi 12 Octobre 2016</p>
+              <p>Place disponible: <img src="content/images/girl.png"> <img src="content/images/man.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>
 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal21" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Réservation</h4>
+          </div>
+          <div class="modal-body">
+
+              <p>Nombre de personnes</p>
+              <div class="list-group">
+                <button type="button" class="list-group-item">1</button>
+                <button type="button" class="list-group-item">2</button>
+              </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
 	<a  name="contact"></a>
     <div class="banner">
 
@@ -166,17 +419,17 @@
         </footer>
 
         <!-- jQuery -->
-        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="content/vendor/jquery/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="content/vendor/bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Plugin JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
         <!-- Theme JavaScript -->
-        <script src="js/new-age.min.js"></script>
-
+        <script src="content/js/new-age.min.js"></script>
+        <script src="content/js/bootstrap-lightbox.js"></script>
     </body>
 
 
@@ -217,22 +470,7 @@
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
-    <script>
-      function initMap() {
-        var uluru = {lat: 45.783329 , lng: 3.08333};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQGb_zaqK94WZD-7uMLHpz7zHm-6HybJU&callback=initMap">
-    </script>
+
 
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
