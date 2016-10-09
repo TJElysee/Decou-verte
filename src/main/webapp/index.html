@@ -1,201 +1,204 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DecouVerte</title>
-    <meta name="description" content="">
-    <meta name="google" value="notranslate">
-    <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DecouVerte</title>
+  <meta name="description" content="">
+  <meta name="google" value="notranslate">
+  <meta name="viewport" content="width=device-width">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS -->
+  <link href="content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="content/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="content/vendor/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="content/vendor/device-mockups/device-mockups.min.css">
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="content/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="content/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="content/vendor/device-mockups/device-mockups.min.css">
 
-    <!-- Theme CSS -->
-    <link href="content/css/new-age.min.css" rel="stylesheet">
+  <!-- Theme CSS -->
+  <link href="content/css/new-age.min.css" rel="stylesheet">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css content/css/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
-    <!-- endinject -->
-    <!-- endbuild -->
-    <!-- build:css content/css/main.css -->
-    <link rel="stylesheet" href="content/css/main.css">
-    <!-- endbuild -->
-    <link href="content/css/scrolling-nav.css" rel="stylesheet">
-    <link href="content/css/landing-page.css" rel="stylesheet">
-    <link href="content/css/heroic-features.css" rel="stylesheet">
-    <link href="content/css/bootstrap-lightbox.css" rel="stylesheet">
-
-
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css content/css/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+  <!-- endinject -->
+  <!-- endbuild -->
+  <!-- build:css content/css/main.css -->
+  <link rel="stylesheet" href="content/css/main.css">
+  <!-- endbuild -->
+  <link href="content/css/scrolling-nav.css" rel="stylesheet">
+  <link href="content/css/landing-page.css" rel="stylesheet">
+  <link href="content/css/heroic-features.css" rel="stylesheet">
+  <link href="content/css/bootstrap-lightbox.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top" ng-app="decouVerteApp" ng-strict-di>
-    <!--[if lt IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div ui-view="navbar" ng-cloak></div>
-    <section id="carte" class="intro-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div id="map"></div>
-                    <script>
-        var map;
-        var locations = [
+  <!--[if lt IE 9]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div ui-view="navbar" ng-cloak></div>
+  <section id="carte" class="intro-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div id="map"></div>
+
+          <!-- script de création des noeuds sur la map google  -->
+          <script>
+          var map;
+          var locations = [
             [45.112226,3.018402,'Puy de Dome','fix'],
             [45.743084,3.218453,'Plan d\'eau de Cournon', 'fix'],
             [45.720528,3.127064,'Plateau de Gergovie','corporate'],
             [45.778572,2.965535,'Nid de la Poule','fix'],
             [45.774848,3.082513,'Clermontoise','regionaux']
-        ]
+          ]
 
-    </script>
+          </script>
 
-    <!-- build:js app/app.js  -->
-    <script>
-      function initMap() {
+          <!-- build:js app/app.js  -->
+          <script>
+          <!-- initialisation de la google map -->
+          function initMap() {
 
-        var uluru = {lat: 45.783329 , lng: 3.08333};
-         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: uluru
-        });
+            var uluru = {lat: 45.783329 , lng: 3.08333};
+            map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 10,
+              center: uluru
+            });
 
-        var infowindow = new google.maps.InfoWindow();
+            var infowindow = new google.maps.InfoWindow();
 
-        var marker, i;
+            var marker, i;
 
-        for (i = 0; i < locations.length; i++) {
-          marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-            map: map
-          });
-          var content = '<h4>Meeting SOPRA-STERIA </h4>'+
-          '<h6>Evenement Entreprise</h6>'+
-          '<p>Créateur: <a>John Snow</a>'+
-          '<p>Lieu: Plateau de Gergovie </p>'+
-          '<p>Date: Samedi 08 Octobre 2016</p>'+
-          '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
-          +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
+            for (i = 0; i < locations.length; i++) {
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                map: map
+              });
+              <!-- Bulle d information des bulles -->
+              var content = '<h4>Meeting SOPRA-STERIA </h4>'+
+              '<h6>Evenement Entreprise</h6>'+
+              '<p>Créateur: <a>John Snow</a>'+
+              '<p>Lieu: Plateau de Gergovie </p>'+
+              '<p>Date: Samedi 08 Octobre 2016</p>'+
+              '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
+              +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
 
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-              infowindow.setContent(content);
-              infowindow.open(map, marker);
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                  infowindow.setContent(content);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+
+
             }
-          })(marker, i));
+          }</script>
 
 
-        }
-  }</script>
-                    <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQGb_zaqK94WZD-7uMLHpz7zHm-6HybJU&callback=initMap">
-                    </script>
-                </div>
-                <div class="col-lg-4 filtre">
-                  <h4>Filtres:</h4>
-                  <div class="checkbox">
-                      <label><input type="checkbox" checked = true id="ch1" onclick="updateMap()">Activités</label>
-                  </div>
-                  <div class="checkbox">
-                      <label><input type="checkbox" checked = true  id="ch2" onclick="updateMap()" value="ch2">Evenements du moment</label>
-                  </div>
-                  <div class="checkbox">
-                      <label><input type="checkbox" checked = true  id="ch3" onclick="updateMap()" value="ch3" >Organisé par votre entreprise</label>
-                  </div>
-                </div>
-<div>
-                <script>
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQGb_zaqK94WZD-7uMLHpz7zHm-6HybJU&callback=initMap">
+          </script>
+        </div>
+        <!-- critères de filtrages des activités-->
+        <div class="col-lg-4 filtre">
+          <h4>Filtres:</h4>
+          <div class="checkbox">
+            <label><input type="checkbox" checked = true id="ch1" onclick="updateMap()">Activités Natures</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" checked = true  id="ch2" onclick="updateMap()" value="ch2">Evénements du moment</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" checked = true  id="ch3" onclick="updateMap()" value="ch3" >Organisé par votre entreprise</label>
+          </div>
+        </div>
 
-                   function updateMap(){
-                      map = null;
-                     var uluru = {lat: 45.783329 , lng: 3.08333};
-                      map = new google.maps.Map(document.getElementById('map'), {
-                       zoom: 10,
-                       center: uluru
-                     });
+        <div>
+          <script>
+          <!-- mise à jour de la bdd selon les critères sélectionnés -->
+          function updateMap(){
+            map = null;
+            var uluru = {lat: 45.783329 , lng: 3.08333};
+            map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 10,
+              center: uluru
+            });
 
-                     var infowindow = new google.maps.InfoWindow();
+            var infowindow = new google.maps.InfoWindow();
 
-                     var marker, i;
+            var marker, i;
 
-                     for (i = 0; i < locations.length; i++) {
-                       if((locations[i][3]=='fix' && document.getElementById('ch1').checked )
-                       || (locations[i][3]=='regionaux' && document.getElementById('ch2').checked )
-                       || (locations[i][3]=='corporate' && document.getElementById('ch3').checked )){
+            for (i = 0; i < locations.length; i++) {
+              if((locations[i][3]=='fix' && document.getElementById('ch1').checked )
+              || (locations[i][3]=='regionaux' && document.getElementById('ch2').checked )
+              || (locations[i][3]=='corporate' && document.getElementById('ch3').checked )){
 
-                       marker = new google.maps.Marker({
-                         position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-                         map: map
-                       });
-                       var content = '<h4>Meeting SOPRA-STERIA </h4>'+
-                       '<h6>Evenement Entreprise</h6>'+
-                       '<p>Créateur: <a>John Snow</a>'+
-                       '<p>Lieu: Plateau de Gergovie </p>'+
-                       '<p>Date: Samedi 08 Octobre 2016</p>'+
-                       '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
-                       +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
+                marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                  map: map
+                });
+                var content = '<h4>Meeting SOPRA-STERIA </h4>'+
+                '<h6>Evenement Entreprise</h6>'+
+                '<p>Créateur: <a>John Snow</a>'+
+                '<p>Lieu: Plateau de Gergovie </p>'+
+                '<p>Date: Samedi 08 Octobre 2016</p>'+
+                '<p>Place disponible: <img src="content/images/boy.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>'
+                +'<a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalmap">Réserver</a>';
 
-                       google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                         return function() {
-                           infowindow.setContent(content);
-                           infowindow.open(map, marker);
-                         }
-                       })(marker, i));
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                  return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                  }
+                })(marker, i));
 
-                   }
-                 }
-                 }
-                </script>
-            </div>
-            </div>
+              }
+            }
+          }
+          </script>
+        </div>
+      </div>
 
-            <div class="row">
+      <!-- Case de scrolling vers le bas  -->
+      <div class="row">
 
-              <div class="col-lg-12 text-center">
-                <a class="btn btn-default page-scroll" href="#regionscroll">Besoin d'idées ?</a>
-              </div>
-              </div>
+        <div class="col-lg-12 text-center">
+          <a class="btn btn-default page-scroll" href="#regionscroll">Besoin d'idées ?</a>
+        </div>
+      </div>
 
     </section>
 
-
-
-
-
-
-<section>
-    <div id="regionscroll" class="row colonne">
+    <!-- division des idées proposées-->
+    <section>
+      <div id="regionscroll" class="row colonne">
         <div class="col-lg-12">
-            <h1>Activités proches de vous:</h1>
+          <h1>Activités proches de vous:</h1>
         </div>
-    </div>
+      </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModalmap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Réserver</h4>
-          </div>
-          <div class="modal-body">
+      <!-- Modal -->
+      <div class="modal fade" id="myModalmap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Réserver</h4>
+            </div>
+            <div class="modal-body">
 
               <p>Nombre de personnes:</p>
               <div class="list-group">
@@ -204,29 +207,30 @@
                 <button type="button" class="list-group-item">3</button>
               </div>
 
-          </div>
+            </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="page-alert" data-toggle-id="2">Valider</button>
-          </div>
-  </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="page-alert" data-toggle-id="2">Valider</button>
+            </div>
           </div>
         </div>
-    <!-- Page Features -->
-    <div class="row colonne text-center">
+      </div>
+
+      <!-- Page Features -->
+      <div class="row colonne text-center">
 
         <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="content/img/chemin.jpeg" class="preview" alt="">
-                <div class="caption">
-                    <h3>Randonnée</h3>
-                    <p>Organisez une randonnée entre collègues au Puy de Dôme.</p>
-                    <p>
-                        <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">Plus d'infos</a>
-                    </p>
-                </div>
+          <div class="thumbnail">
+            <img src="content/img/chemin.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Randonnée</h3>
+              <p>Organisez une randonnée entre collègues au Puy de Dôme.</p>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">Plus d'infos</a>
+              </p>
             </div>
+          </div>
         </div>
 
         <!-- Modal -->
@@ -249,18 +253,18 @@
             </div>
           </div>
         </div>
-
+        <!-- module Kayak-->
         <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="content/img/kayak.jpeg" class="preview" alt="">
-                <div class="caption">
-                    <h3>Kayak</h3>
-                    <p>Découvrez le kayak au lac de Cournon.</p>
-                    <p>
-                        <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Plus d'infos</a>
-                    </p>
-                </div>
+          <div class="thumbnail">
+            <img src="content/img/kayak.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Kayak</h3>
+              <p>Découvrez le kayak au lac de Cournon.</p>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Plus d'infos</a>
+              </p>
             </div>
+          </div>
         </div>
 
         <!-- Modal -->
@@ -285,16 +289,16 @@
         </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="content/img/road.jpeg" class="preview" alt="">
-                <div class="caption">
-                    <h3>Vélo</h3>
-                    <p>Découvrez les pistes d'Auvergne avec votre équipe</p>
-                    <p>
-                          <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Plus d'info</a>
-                    </p>
-                </div>
+          <div class="thumbnail">
+            <img src="content/img/road.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Vélo</h3>
+              <p>Découvrez les pistes d'Auvergne avec votre équipe</p>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Plus d'info</a>
+              </p>
             </div>
+          </div>
         </div>
 
         <!-- Modal -->
@@ -319,277 +323,511 @@
         </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="content/img/museumjpeg" class="preview" alt="">
-                <div class="caption">
-                    <h3>Musée</h3>
-                    <p>Découvrez de nouvelles choses avec vos collègues.</p>
-                    <p>
-                          <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Plus d'infos</a>
-                    </p>
-                </div>
+          <div class="thumbnail">
+            <img src="content/img/museum.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Musée</h3>
+              <p>Découvrez de nouvelles choses avec vos collègues.</p>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Plus d'infos</a>
+              </p>
             </div>
+          </div>
         </div>
 
-    </div>
-    <!-- /.row -->
+      </div>
+      <!-- /.row -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Visite</h4>
-          </div>
-          <div class="modal-body">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Visite</h4>
+            </div>
+            <div class="modal-body">
 
               <h4>Musée d'art Roger-Quilliot </h4>
               <h6>Activité</h6>
               <p>Créateur: <a>Jane Smith</a>
-              <p>Lieu: Place Louis-Deteix </p>
-              <p>Date: Lundi 12 Octobre 2016</p>
-              <p>Place disponible: <img src="content/images/girl.png"> <img src="content/images/man.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>
+                <p>Lieu: Place Louis-Deteix </p>
+                <p>Date: Lundi 12 Octobre 2016</p>
+                <p>Place disponible: <img src="content/images/girl.png"> <img src="content/images/man.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>
 
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+        </div>
+
+        <div class="modal fade" id="myModal21" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Réservation</h4>
+              </div>
+              <div class="modal-body">
+
+                <p>Nombre de personnes</p>
+                <div class="list-group">
+                  <button type="button" class="list-group-item">1</button>
+                  <button type="button" class="list-group-item">2</button>
+                </div>
+					<div class="checkbox">
+            <label><input type="checkbox" >Je m'engage à respecter la charte d'utilisation du logiciel</label>
+          </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--- ____________________________________- --->
+      <!-- Modal -->
+      <div class="modal fade" id="myModalmap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Réserver</h4>
+            </div>
+            <div class="modal-body">
+
+              <p>Nombre de personnes:</p>
+              <div class="list-group">
+                <button type="button" class="list-group-item">1</button>
+                <button type="button" class="list-group-item">2</button>
+                <button type="button" class="list-group-item">3</button>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="page-alert" data-toggle-id="2">Valider</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="modal fade" id="myModal21" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <!-- Page Features -->
+	  <div id="regionscroll" class="row colonne">
+        <div class="col-lg-12">
+          <h1>Propositions personnalisées:</h1>
+        </div>
+      </div>
+      <div class="row colonne text-center">
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+          <div class="thumbnail">
+		  <div class="caption">
+			<a> Antoine Sapain</a> a récemment testé :
+		  </div>
+            <img src="content/img/chem2.jpeg" class="preview" alt="">
+            <div class="caption">
+				<h3>Sortie vélo au marché d'Aubière</h3>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">Plus d'infos</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                1
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- module Kayak-->
+        <div class="col-md-3 col-sm-6 hero-feature">
+          <div class="thumbnail">
+		  <div class="caption">
+			<a> Sandrine Dupond </a> a récemment testé :
+			</div>
+            <img src="content/img/canoe.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Canoë au Lac d'Aydat</h3>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Plus d'infos</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                2
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 hero-feature">
+          <div class="thumbnail">
+		  <div class="caption">
+			Votre entreprise organise bientôt:
+		</div>
+            <img src="content/img/marathon.jpg" class="preview" alt="">
+            <div class="caption">
+
+              <h3>5km d'Orcet</h3>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModalInfo">Plus d'info</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+           <div class="modal fade" id="myModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Réservation</h4>
+            <h4 class="modal-title" id="myModalLabel">Marathon </h4>
           </div>
           <div class="modal-body">
 
-              <p>Nombre de personnes</p>
-              <div class="list-group">
-                <button type="button" class="list-group-item">1</button>
-                <button type="button" class="list-group-item">2</button>
-              </div>
+              <h4>5km d'Orcet</h4>
+              <h6>Activité</h6>
+              <p>Lieu: Orcet</p>
+              <p>Infos: 10 min de voiture; Départ: Clermont-Ferrand</p>
+
 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalCreation">Créer</button>
           </div>
         </div>
       </div>
     </div>
-</section>
-	<a  name="contact"></a>
-    <div class="banner">
 
-        <div class="container">
+    <div class="modal fade" id="myModalCreation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Création de l'événement</h4>
+          </div>
+          <div class="modal-body">
 
-
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label>
+                    <input type="Date" class="form-control" id="exampleInputEmail1" placeholder="Date">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Nombre de places disponibles (vous exclu)</label>
+                    <input type="nombre" class="form-control" id="exampleInputPassword1" placeholder="Nombre de Places">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Infos complémentaires</label>
+                    <input type="string" class="form-control" id="exampleInputPassword1" placeholder="Infos">
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary"  data-dismiss="modal">Créer</button>
+          </div>
         </div>
-        <!-- /.container -->
-
+      </div>
     </div>
 
-
-
-        <footer>
-            <div class="container">
-                <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
-                <ul class="list-inline">
-                    <li>
-                        <a href="#">Privacy</a>
-                    </li>
-                    <li>
-                        <a href="#">Terms</a>
-                    </li>
-                    <li>
-                        <a href="#">FAQ</a>
-                    </li>
-                </ul>
+        <div class="col-md-3 col-sm-6 hero-feature">
+          <div class="thumbnail">
+		  <div class="caption">
+			Nous vous proposons:
+		  </div>
+            <img src="content/img/trail.jpeg" class="preview" alt="">
+            <div class="caption">
+              <h3>Trail jusqu'au Puy de Dome</h3>
+              <p>
+                <a href="#" id="click-me" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Plus d'infos</a>
+              </p>
             </div>
-        </footer>
+          </div>
+        </div>
 
-        <!-- jQuery -->
-        <script src="content/vendor/jquery/jquery.min.js"></script>
+      </div>
+      <!-- /.row -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="content/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Visite</h4>
+            </div>
+            <div class="modal-body">
 
-        <!-- Plugin JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+              <h4>Musée d'art Roger-Quilliot </h4>
+              <h6>Activité</h6>
+              <p>Créateur: <a>Jane Smith</a>
+                <p>Lieu: Place Louis-Deteix </p>
+                <p>Date: Lundi 12 Octobre 2016</p>
+                <p>Place disponible: <img src="content/images/girl.png"> <img src="content/images/man.png"> <img src="content/images/avatar.png"> <img src="content/images/avatar.png"></p>
 
-        <!-- Theme JavaScript -->
-        <script src="content/js/new-age.min.js"></script>
-        <script src="content/js/bootstrap-lightbox.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="myModal21" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Réservation</h4>
+              </div>
+              <div class="modal-body">
+
+                <p>Nombre de personnes</p>
+                <div class="list-group">
+                  <button type="button" class="list-group-item">1</button>
+                  <button type="button" class="list-group-item">2</button>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal21">Réserver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- jQuery -->
+      <script src="content/vendor/jquery/jquery.min.js"></script>
+
+      <!-- Bootstrap Core JavaScript -->
+      <script src="content/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+      <!-- Plugin JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+      <!-- Theme JavaScript -->
+      <script src="content/js/new-age.min.js"></script>
+      <script src="content/js/bootstrap-lightbox.js"></script>
     </body>
 
 
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
     <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>-->
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');
+  </script>-->
 
-    <!-- build:js app/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/messageformat/messageformat.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
-    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
-    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
-    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-    <!-- endinject -->
-    <!-- endbuild -->
+  <!-- build:js app/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/messageformat/messageformat.js"></script>
+  <script src="bower_components/json3/lib/json3.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
+  <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+  <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <!-- endinject -->
+  <!-- endbuild -->
 
-    <!-- build:js app/app.js  -->
+  <!-- build:js app/app.js  -->
 
 
-    <!-- inject:js -->
-    <script src="app/app.module.js"></script>
-    <script src="app/services/user/user.service.js"></script>
-    <script src="app/services/profiles/profile.service.js"></script>
-    <script src="app/services/profiles/page-ribbon.directive.js"></script>
-    <script src="app/services/auth/sessions.service.js"></script>
-    <script src="app/services/auth/register.service.js"></script>
-    <script src="app/services/auth/principal.service.js"></script>
-    <script src="app/services/auth/password-reset-init.service.js"></script>
-    <script src="app/services/auth/password-reset-finish.service.js"></script>
-    <script src="app/services/auth/password.service.js"></script>
-    <script src="app/services/auth/has-authority.directive.js"></script>
-    <script src="app/services/auth/has-any-authority.directive.js"></script>
-    <script src="app/services/auth/auth.session.service.js"></script>
-    <script src="app/services/auth/auth.service.js"></script>
-    <script src="app/services/auth/activate.service.js"></script>
-    <script src="app/services/auth/account.service.js"></script>
-    <script src="app/layouts/navbar/navbar.controller.js"></script>
-    <script src="app/layouts/navbar/active-menu.directive.js"></script>
-    <script src="app/layouts/navbar/active-link.directive.js"></script>
-    <script src="app/layouts/error/error.state.js"></script>
-    <script src="app/home/home.state.js"></script>
-    <script src="app/home/home.controller.js"></script>
-    <script src="app/entities/entity.state.js"></script>
-    <script src="app/components/util/truncate-words.filter.js"></script>
-    <script src="app/components/util/truncate-characters.filter.js"></script>
-    <script src="app/components/util/sort-by.directive.js"></script>
-    <script src="app/components/util/sort.directive.js"></script>
-    <script src="app/components/util/parse-links.service.js"></script>
-    <script src="app/components/util/pagination-util.service.js"></script>
-    <script src="app/components/util/jhi-item-count.directive.js"></script>
-    <script src="app/components/util/date-util.service.js"></script>
-    <script src="app/components/util/data-util.service.js"></script>
-    <script src="app/components/util/capitalize.filter.js"></script>
-    <script src="app/components/util/base64.service.js"></script>
-    <script src="app/components/login/login.service.js"></script>
-    <script src="app/components/login/login.controller.js"></script>
-    <script src="app/components/language/language.service.js"></script>
-    <script src="app/components/language/language.filter.js"></script>
-    <script src="app/components/language/language.controller.js"></script>
-    <script src="app/components/language/language.constants.js"></script>
-    <script src="app/components/form/show-validation.directive.js"></script>
-    <script src="app/components/form/pagination.constants.js"></script>
-    <script src="app/components/form/minbytes.directive.js"></script>
-    <script src="app/components/form/maxbytes.directive.js"></script>
-    <script src="app/components/alert/alert-error.directive.js"></script>
-    <script src="app/components/alert/alert.service.js"></script>
-    <script src="app/components/alert/alert.directive.js"></script>
-    <script src="app/blocks/interceptor/notification.interceptor.js"></script>
-    <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
-    <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
-    <script src="app/blocks/handlers/translation.handler.js"></script>
-    <script src="app/blocks/handlers/state.handler.js"></script>
-    <script src="app/blocks/config/uib-pagination.config.js"></script>
-    <script src="app/blocks/config/uib-pager.config.js"></script>
-    <script src="app/blocks/config/translation-storage.provider.js"></script>
-    <script src="app/blocks/config/translation.config.js"></script>
-    <script src="app/blocks/config/localstorage.config.js"></script>
-    <script src="app/blocks/config/http.config.js"></script>
-    <script src="app/blocks/config/compile.config.js"></script>
-    <script src="app/blocks/config/alert.config.js"></script>
-    <script src="app/app.state.js"></script>
-    <script src="app/app.constants.js"></script>
-    <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
-    <script src="app/admin/user-management/user-management-detail.controller.js"></script>
-    <script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
-    <script src="app/admin/user-management/user-management.state.js"></script>
-    <script src="app/admin/user-management/user-management.controller.js"></script>
-    <script src="app/admin/metrics/metrics.state.js"></script>
-    <script src="app/admin/metrics/metrics.service.js"></script>
-    <script src="app/admin/metrics/metrics.modal.controller.js"></script>
-    <script src="app/admin/metrics/metrics.controller.js"></script>
-    <script src="app/admin/logs/logs.state.js"></script>
-    <script src="app/admin/logs/logs.service.js"></script>
-    <script src="app/admin/logs/logs.controller.js"></script>
-    <script src="app/admin/health/health.state.js"></script>
-    <script src="app/admin/health/health.service.js"></script>
-    <script src="app/admin/health/health.modal.controller.js"></script>
-    <script src="app/admin/health/health.controller.js"></script>
-    <script src="app/admin/docs/docs.state.js"></script>
-    <script src="app/admin/configuration/configuration.state.js"></script>
-    <script src="app/admin/configuration/configuration.service.js"></script>
-    <script src="app/admin/configuration/configuration.controller.js"></script>
-    <script src="app/admin/audits/audits.state.js"></script>
-    <script src="app/admin/audits/audits.service.js"></script>
-    <script src="app/admin/audits/audits.controller.js"></script>
-    <script src="app/admin/admin.state.js"></script>
-    <script src="app/account/social/social-register.controller.js"></script>
-    <script src="app/account/social/social.state.js"></script>
-    <script src="app/account/social/social.service.js"></script>
-    <script src="app/account/social/directive/social.directive.js"></script>
-    <script src="app/account/settings/settings.state.js"></script>
-    <script src="app/account/settings/settings.controller.js"></script>
-    <script src="app/account/sessions/sessions.state.js"></script>
-    <script src="app/account/sessions/sessions.controller.js"></script>
-    <script src="app/account/reset/request/reset.request.state.js"></script>
-    <script src="app/account/reset/request/reset.request.controller.js"></script>
-    <script src="app/account/reset/finish/reset.finish.state.js"></script>
-    <script src="app/account/reset/finish/reset.finish.controller.js"></script>
-    <script src="app/account/register/register.state.js"></script>
-    <script src="app/account/register/register.controller.js"></script>
-    <script src="app/account/password/password-strength-bar.directive.js"></script>
-    <script src="app/account/password/password.state.js"></script>
-    <script src="app/account/password/password.controller.js"></script>
-    <script src="app/account/activate/activate.state.js"></script>
-    <script src="app/account/activate/activate.controller.js"></script>
-    <script src="app/account/account.state.js"></script>
-    <!-- endinject -->
-    <!-- endbuild -->
-    <!-- jQuery -->
-    <script src="content/js/jquery.js"></script>
+  <!-- inject:js -->
+  <script src="app/app.module.js"></script>
+  <script src="app/services/user/user.service.js"></script>
+  <script src="app/services/profiles/profile.service.js"></script>
+  <script src="app/services/profiles/page-ribbon.directive.js"></script>
+  <script src="app/services/auth/sessions.service.js"></script>
+  <script src="app/services/auth/register.service.js"></script>
+  <script src="app/services/auth/principal.service.js"></script>
+  <script src="app/services/auth/password-reset-init.service.js"></script>
+  <script src="app/services/auth/password-reset-finish.service.js"></script>
+  <script src="app/services/auth/password.service.js"></script>
+  <script src="app/services/auth/has-authority.directive.js"></script>
+  <script src="app/services/auth/has-any-authority.directive.js"></script>
+  <script src="app/services/auth/auth.session.service.js"></script>
+  <script src="app/services/auth/auth.service.js"></script>
+  <script src="app/services/auth/activate.service.js"></script>
+  <script src="app/services/auth/account.service.js"></script>
+  <script src="app/layouts/navbar/navbar.controller.js"></script>
+  <script src="app/layouts/navbar/active-menu.directive.js"></script>
+  <script src="app/layouts/navbar/active-link.directive.js"></script>
+  <script src="app/layouts/error/error.state.js"></script>
+  <script src="app/home/home.state.js"></script>
+  <script src="app/home/home.controller.js"></script>
+  <script src="app/entities/entity.state.js"></script>
+  <script src="app/components/util/truncate-words.filter.js"></script>
+  <script src="app/components/util/truncate-characters.filter.js"></script>
+  <script src="app/components/util/sort-by.directive.js"></script>
+  <script src="app/components/util/sort.directive.js"></script>
+  <script src="app/components/util/parse-links.service.js"></script>
+  <script src="app/components/util/pagination-util.service.js"></script>
+  <script src="app/components/util/jhi-item-count.directive.js"></script>
+  <script src="app/components/util/date-util.service.js"></script>
+  <script src="app/components/util/data-util.service.js"></script>
+  <script src="app/components/util/capitalize.filter.js"></script>
+  <script src="app/components/util/base64.service.js"></script>
+  <script src="app/components/login/login.service.js"></script>
+  <script src="app/components/login/login.controller.js"></script>
+  <script src="app/components/language/language.service.js"></script>
+  <script src="app/components/language/language.filter.js"></script>
+  <script src="app/components/language/language.controller.js"></script>
+  <script src="app/components/language/language.constants.js"></script>
+  <script src="app/components/form/show-validation.directive.js"></script>
+  <script src="app/components/form/pagination.constants.js"></script>
+  <script src="app/components/form/minbytes.directive.js"></script>
+  <script src="app/components/form/maxbytes.directive.js"></script>
+  <script src="app/components/alert/alert-error.directive.js"></script>
+  <script src="app/components/alert/alert.service.js"></script>
+  <script src="app/components/alert/alert.directive.js"></script>
+  <script src="app/blocks/interceptor/notification.interceptor.js"></script>
+  <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
+  <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+  <script src="app/blocks/handlers/translation.handler.js"></script>
+  <script src="app/blocks/handlers/state.handler.js"></script>
+  <script src="app/blocks/config/uib-pagination.config.js"></script>
+  <script src="app/blocks/config/uib-pager.config.js"></script>
+  <script src="app/blocks/config/translation-storage.provider.js"></script>
+  <script src="app/blocks/config/translation.config.js"></script>
+  <script src="app/blocks/config/localstorage.config.js"></script>
+  <script src="app/blocks/config/http.config.js"></script>
+  <script src="app/blocks/config/compile.config.js"></script>
+  <script src="app/blocks/config/alert.config.js"></script>
+  <script src="app/app.state.js"></script>
+  <script src="app/app.constants.js"></script>
+  <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
+  <script src="app/admin/user-management/user-management-detail.controller.js"></script>
+  <script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
+  <script src="app/admin/user-management/user-management.state.js"></script>
+  <script src="app/admin/user-management/user-management.controller.js"></script>
+  <script src="app/admin/metrics/metrics.state.js"></script>
+  <script src="app/admin/metrics/metrics.service.js"></script>
+  <script src="app/admin/metrics/metrics.modal.controller.js"></script>
+  <script src="app/admin/metrics/metrics.controller.js"></script>
+  <script src="app/admin/logs/logs.state.js"></script>
+  <script src="app/admin/logs/logs.service.js"></script>
+  <script src="app/admin/logs/logs.controller.js"></script>
+  <script src="app/admin/health/health.state.js"></script>
+  <script src="app/admin/health/health.service.js"></script>
+  <script src="app/admin/health/health.modal.controller.js"></script>
+  <script src="app/admin/health/health.controller.js"></script>
+  <script src="app/admin/docs/docs.state.js"></script>
+  <script src="app/admin/configuration/configuration.state.js"></script>
+  <script src="app/admin/configuration/configuration.service.js"></script>
+  <script src="app/admin/configuration/configuration.controller.js"></script>
+  <script src="app/admin/audits/audits.state.js"></script>
+  <script src="app/admin/audits/audits.service.js"></script>
+  <script src="app/admin/audits/audits.controller.js"></script>
+  <script src="app/admin/admin.state.js"></script>
+  <script src="app/account/social/social-register.controller.js"></script>
+  <script src="app/account/social/social.state.js"></script>
+  <script src="app/account/social/social.service.js"></script>
+  <script src="app/account/social/directive/social.directive.js"></script>
+  <script src="app/account/settings/settings.state.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
+  <script src="app/account/sessions/sessions.state.js"></script>
+  <script src="app/account/sessions/sessions.controller.js"></script>
+  <script src="app/account/reset/request/reset.request.state.js"></script>
+  <script src="app/account/reset/request/reset.request.controller.js"></script>
+  <script src="app/account/reset/finish/reset.finish.state.js"></script>
+  <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+  <script src="app/account/register/register.state.js"></script>
+  <script src="app/account/register/register.controller.js"></script>
+  <script src="app/account/password/password-strength-bar.directive.js"></script>
+  <script src="app/account/password/password.state.js"></script>
+  <script src="app/account/password/password.controller.js"></script>
+  <script src="app/account/activate/activate.state.js"></script>
+  <script src="app/account/activate/activate.controller.js"></script>
+  <script src="app/account/account.state.js"></script>
+  <!-- endinject -->
+  <!-- endbuild -->
+  <!-- jQuery -->
+  <script src="content/js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="content/js/bootstrap.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="content/js/bootstrap.min.js"></script>
 
-    <!-- Scrolling Nav JavaScript -->
-    <script src="content/js/jquery.easing.min.js"></script>
-    <script src="content/js/scrolling-nav.js"></script>
+  <!-- Scrolling Nav JavaScript -->
+  <script src="content/js/jquery.easing.min.js"></script>
+  <script src="content/js/scrolling-nav.js"></script>
 
 </body>
 </html>
